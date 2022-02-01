@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Suggestion service",
+    "description": "To suggest things",
+    "url": "http://123.456.789.31:3132/healthz"
+  },
+  {
+    "name": "Payment service",
+    "description": "To handle payment subscription",
+    "url": "http://456.123.678.30:3353/_/health",
+    "timeout": 5,
+    "interval": 20
+  }
+]
