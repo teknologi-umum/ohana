@@ -2,6 +2,7 @@ package com.teknologiumum.worker
 
 import com.teknologiumum.commons.EndpointDTO
 import com.teknologiumum.commons.ResponseDTO
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.future.await
 import java.io.IOException
 import java.net.URI
@@ -11,7 +12,16 @@ import java.net.http.HttpResponse
 import java.time.Duration
 
 class Worker(private var endpoint: EndpointDTO) {
-    suspend fun createRequest(): ResponseDTO {
+    suspend fun start() {
+        val interval: Long = endpoint.interval?.toLong() ?: 30
+        while (true) {
+            delay(interval)
+            val response = this.createRequest()
+
+        }
+    }
+
+    private suspend fun createRequest(): ResponseDTO {
         try {
             val client = HttpClient.newBuilder()
                 .connectTimeout(

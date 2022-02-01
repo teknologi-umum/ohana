@@ -8,4 +8,4 @@ open class EndpointDTO(
     @SerializedName("description") val description: String? = "",
     @SerializedName("timeout") val timeout: Int? = 10,
     @SerializedName("interval") val interval: Int? = 30
-    )
+)

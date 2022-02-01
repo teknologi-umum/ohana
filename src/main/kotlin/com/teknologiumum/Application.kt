@@ -2,14 +2,14 @@ package com.teknologiumum
 
 import com.google.gson.Gson
 import com.teknologiumum.commons.EndpointDTO
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
 import com.teknologiumum.plugins.*
 import com.teknologiumum.worker.Worker
-import java.io.File
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
 import kotlinx.coroutines.*
+import java.io.File
 
-fun main(): Unit = runBlocking{
+fun main(): Unit = runBlocking {
     val jsonString: String = File("../../../../config.json")
         .readText(Charsets.UTF_8)
     val gson = Gson()
@@ -19,11 +19,13 @@ fun main(): Unit = runBlocking{
     val workers: ArrayList<Job> = ArrayList()
     endpoints.forEach { endpoint ->
         val worker = launch {
-            Worker(endpoint)
+            // Should we put a try catch here?
+            Worker(endpoint).start()
         }
         worker.start()
         workers += worker
     }
+
     embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
         configureRouting()
         configureHTTP()
