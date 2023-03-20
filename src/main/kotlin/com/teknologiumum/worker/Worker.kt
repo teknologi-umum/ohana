@@ -11,13 +11,13 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.time.Duration
 
-class Worker(private var endpoint: EndpointDTO) {
+class Worker(private var endpoint: EndpointDTO) { // TODO: change the EndpointDTO into something that's not a DTO, but a local model
     suspend fun start() {
         val interval: Long = endpoint.interval?.toLong() ?: 30
         while (true) {
             delay(interval)
             val response = this.createRequest()
-
+            // TODO: continue this
         }
     }
 
@@ -48,11 +48,6 @@ class Worker(private var endpoint: EndpointDTO) {
                 success = true,
                 statusCode = response.statusCode(),
                 requestDuration = timeAfterRequest - timeBeforeRequest,
-                name = endpoint.name,
-                url = endpoint.url,
-                description = endpoint.description,
-                interval = endpoint.interval,
-                timeout = endpoint.timeout,
             )
         } catch (e: InterruptedException) {
             // TODO
@@ -60,11 +55,6 @@ class Worker(private var endpoint: EndpointDTO) {
                 success = false,
                 statusCode = 0,
                 requestDuration = 0,
-                name = endpoint.name,
-                url = endpoint.url,
-                description = endpoint.description,
-                interval = endpoint.interval,
-                timeout = endpoint.timeout
             )
         } catch (e: IOException) {
             // TODO
@@ -72,11 +62,6 @@ class Worker(private var endpoint: EndpointDTO) {
                 success = false,
                 statusCode = 0,
                 requestDuration = 0,
-                name = endpoint.name,
-                url = endpoint.url,
-                description = endpoint.description,
-                interval = endpoint.interval,
-                timeout = endpoint.timeout
             )
         }
     }

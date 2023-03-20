@@ -1,1 +1,1 @@
-rootProject.name = "com.teknologiumum.ohana"
+rootProject.name = "ohana"

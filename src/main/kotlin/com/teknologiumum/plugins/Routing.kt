@@ -1,20 +1,13 @@
 package com.teknologiumum.plugins
 
-import io.ktor.application.*
-import io.ktor.http.content.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.server.routing.*
+import io.ktor.server.response.*
+import io.ktor.server.application.*
 
 fun Application.configureRouting() {
-
-
     routing {
         get("/") {
             call.respondText("Hello World!")
-        }
-        // Static plugin. Try to access `/static/index.html`
-        static("/static") {
-            resources("static")
         }
     }
 }

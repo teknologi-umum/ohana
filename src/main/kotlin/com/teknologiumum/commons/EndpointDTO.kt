@@ -1,11 +1,13 @@
 package com.teknologiumum.commons
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
-open class EndpointDTO(
-    @SerializedName("name") val name: String,
-    @SerializedName("url") val url: String,
-    @SerializedName("description") val description: String? = "",
-    @SerializedName("timeout") val timeout: Int? = 10,
-    @SerializedName("interval") val interval: Int? = 30
+
+@Serializable
+class EndpointDTO(
+    val name: String,
+    val url: String,
+    val description: String? = "",
+    val timeout: Int? = 10,
+    val interval: Int? = 30
 )

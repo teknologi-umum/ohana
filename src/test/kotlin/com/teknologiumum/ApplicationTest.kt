@@ -1,25 +1,21 @@
 package com.teknologiumum
 
-import io.ktor.routing.*
-import io.ktor.http.*
-import io.ktor.http.content.*
-import io.ktor.features.*
-import io.ktor.gson.*
-import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.request.*
-import kotlin.test.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.server.testing.*
+import kotlin.test.*
+import io.ktor.http.*
 import com.teknologiumum.plugins.*
 
 class ApplicationTest {
     @Test
-    fun testRoot() {
-        withTestApplication({ configureRouting() }) {
-            handleRequest(HttpMethod.Get, "/").apply {
-                assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("Hello World!", response.content)
-            }
+    fun testRoot() = testApplication {
+        application {
+            configureRouting()
+        }
+        client.get("/").apply {
+            assertEquals(HttpStatusCode.OK, status)
+            assertEquals("Hello World!", bodyAsText())
         }
     }
 }
